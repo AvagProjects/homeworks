@@ -160,10 +160,8 @@ public class Statements {
      */
     public static long productOfTwoDigitEvens(int n) {
         long product = 1;
-        for (int i = 10; i <= n && i <= 99; i++) {
-            if (i % 2 == 0) {
+        for (int i = 10; i <= n && i <= 98; i+2) {
                 product *= i;
-            }
         }
         return product;
     }
