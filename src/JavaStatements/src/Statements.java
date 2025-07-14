@@ -55,10 +55,7 @@ public class Statements {
      * @return true if inside or on circle
      */
     public static boolean isInCircle(int x, int y) {
-        int dx = x;
-        int dy = y - 5;
-        int distanceSquared = dx * dx + dy * dy;
-        return distanceSquared <= 25;
+        return x*x+y*y <= 25
     }
 
     /**
@@ -208,7 +205,6 @@ public class Statements {
         System.out.println(isInInterval(6));
         System.out.println(isDivisibleBy5And7(35));
         System.out.println(isSecondDigitSeven(974));
-        System.out.println(isInCircle(0, 5));
         System.out.println(maxOfThree(3, 9, 7));
         System.out.println(isLeapYear(2020));
         printNumbersTo200();
