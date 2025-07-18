@@ -1,80 +1,92 @@
 public class StringUtil {
-
     public static void main(String[] args) {
 
-        System.out.println("1․ Concatenation Examples:");
-        concatExamples();
-
-        System.out.println("2․ Print each word from string (without split):");
-        printWordsNewLine("The quick brown fox jumps over the lazy dog");
-
-        System.out.println("3․ Reverse a string:");
-        System.out.println(reverse("sample"));
-
-        System.out.println("4․ Count how many times 'an' appears:");
-        System.out.println("Count: " + countSubString("The quick brown fox jumps over a lazy dog and finds an apple", "an"));
-
-        System.out.println("5․ Uppercase using StringBuilder:");
-        System.out.println(toUpperCaseBuilder("hello world"));
-
-        System.out.println("6․ Pad string to 20 characters:");
-        System.out.println(padToTwenty("Armenia"));
-
-        System.out.println("7․ Remove all 'a' characters:");
-        System.out.println(removeAUsingBuilder("The quick brown fox jumps over a lazy dog and finds an apple"));
-
-        System.out.println("8․ Replace all 'a' with '*':");
-        System.out.println(replaceAWithStarBuilder("The quick brown fox jumps over a lazy dog and finds an apple"));
-
-        System.out.println("9․ Find the longest word:");
-        System.out.println("Longest: " + findLongestWordBuilder("The quick brown fox jumps over a lazy dog and finds an apple"));
-
-        System.out.println("10․ The first time the letter 'a' appears is at index:");
-        System.out.println("Index: " + findCharIndex("The quick brown fox jumps over a lazy dog and finds an apple", "a"));
-
-        System.out.println("11․ Print substring from 0 to n:");
-        printSubLine("Hello World!", 5);
-        printSubLine(new StringBuilder("Hello World!"), 5);
-
-        System.out.println("12․ Is string not empty?");
-        System.out.println(isNotEmpty("Test"));
-
-        System.out.println("13․ Longest part separated by comma:");
-        System.out.println("Longest: " + longestAfterComma("Quick, brown, fox, jumps high, over the dog, and catches something"));
+        StringUtil util = new StringUtil();
+        System.out.println(util.concatHelloWorld()); // 1.1
+        System.out.println(util.concatNumbersAndWord()); // 1.2
+        System.out.println(util.concatStringNumberWord()); // 1.3
+        System.out.println(util.concatWordNumbersWord()); // 1.4
+        util.printEachWordOnNewLine("We Are Living In"); // 2
+        System.out.println(util.reverseString("Letting")); // 3
+        System.out.println(util.countTokenOccurrences("We are living in a yellow submarine. We don't have anything", "in")); // 4
+        System.out.println(util.toUpperCaseUsingString("hello")); // 5
+        System.out.println(util.toUpperCaseUsingBuilder("hello")); // 5.1
+        System.out.println(util.padWithStarsUntil20("Madness")); // 6
+        System.out.println(util.removeLetterA("We are living in a yellow submarine. We don't have anything.")); // 7
+        System.out.println(util.removeLetterAUsingBuilder("We are living in a yellow submarine. We don't have anything.")); // 7.1
+        System.out.println(util.replaceAWithStar("We are living in a yellow submarine. We don't have anything.")); // 8
+        System.out.println(util.findLongestWord("We are living in a yellow submarine. We don't have anything")); // 9
+        System.out.println(util.indexOfFirstA("We are living in a yellow submarine. We don't have anything.")); // 10
+        System.out.println(util.substringToN("We are living in a yellow submarine. We don't have anything.", 9)); // 11
+        System.out.println(util.substringToNUsingBuilder("We are living in a yellow submarine. We don't have anything.", 16)); // 11.1
+        System.out.println(util.checkNotEmpty("")); // 12
+        System.out.println(util.isNotNullOrEmpty("aa")); // 12.1
+        System.out.println(util.findLongestWordSplitByComma("We, are, living, in an, yellow, submarine, We don't, have anything")); // 13
     }
 
-    public static void concatExamples() {
-        System.out.println("hello" + "world");
-        System.out.println(1 + 2 + "hello");
-        System.out.println("1" + 2 + "hello");
-        System.out.println("hello" + 1 + 2 + "world");
+    /**
+     * Concatenates "hello" and "world" with a space.
+     * @return Combined string "hello world"
+     */
+    public String concatHelloWorld() {
+        return "hello" + " " + "world";
     }
 
-    public static void printWordsNewLine(String line) {
-        StringBuilder word = new StringBuilder();
-        for (int i = 0; i < line.length(); i++) {
-            char c = line.charAt(i);
-            if (c != ' ') {
-                word.append(c);
+    /**
+     * Concatenates integers 1 and 2, then appends "hello".
+     * @return Combined result as a string
+     */
+    public String concatNumbersAndWord() {
+        return 1 + 2 + "hello";
+    }
+
+    /**
+     * Concatenates string "1", integer 2, and string "hello".
+     * @return Combined result as a string
+     */
+    public String concatStringNumberWord() {
+        return "1" + 2 + "hello";
+    }
+
+    /**
+     * Concatenates "hello", integers 1 and 2, and "world".
+     * @return Combined result as a string
+     */
+    public String concatWordNumbersWord() {
+        return "hello" + 1 + 2 + "world";
+    }
+
+    /**
+     * Prints each character of the input string on a new line. Replaces spaces with line breaks.
+     * @param input The string to be processed
+     */
+    public void printEachWordOnNewLine(String input) {
+        for (char ch : input.toCharArray()) {
+            if (ch == ' ') {
+                System.out.println();
             } else {
-                if (word.length() > 0) {
-                    System.out.println(word.toString());
-                    word.setLength(0);
-                }
+                System.out.println(ch);
             }
         }
-        if (word.length() > 0) {
-            System.out.println(word.toString());
-        }
     }
 
-    public static String reverse(String str) {
-        return new StringBuilder(str).reverse().toString();
+    /**
+     * Reverses the given string using StringBuilder.
+     * @param input String to reverse
+     * @return Reversed string
+     */
+    public String reverseString(String input) {
+        return new StringBuilder(input).reverse().toString();
     }
 
-    public static int countSubString(String line, String token) {
-        int count = 0;
-        int index = 0;
+    /**
+     * Counts how many times a specific token appears in a line.
+     * @param line Text to search in
+     * @param token Word or character to count
+     * @return Number of occurrences
+     */
+    public int countTokenOccurrences(String line, String token) {
+        int index = 0, count = 0;
         while ((index = line.indexOf(token, index)) != -1) {
             count++;
             index += token.length();
@@ -82,87 +94,151 @@ public class StringUtil {
         return count;
     }
 
-    public static String toUpperCaseBuilder(String text) {
-        StringBuilder sb = new StringBuilder(text);
-        for (int i = 0; i < sb.length(); i++) {
-            sb.setCharAt(i, Character.toUpperCase(sb.charAt(i)));
+    /**
+     * Converts the input string to uppercase using String methods.
+     * @param word The input string
+     * @return Uppercased string
+     */
+    public String toUpperCaseUsingString(String word) {
+        return word.toUpperCase();
+    }
+
+    /**
+     * Converts the input string to uppercase using StringBuilder.
+     * @param word The input string
+     * @return Uppercased string
+     */
+    public String toUpperCaseUsingBuilder(String word) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : word.toCharArray()) {
+            sb.append(Character.toUpperCase(ch));
         }
         return sb.toString();
     }
 
-    public static String padToTwenty(String line) {
-        StringBuilder sb = new StringBuilder(line);
+    /**
+     * Pads the input string with '*' characters until the total length becomes 20.
+     * @param input Input string
+     * @return Padded string of length 20
+     */
+    public String padWithStarsUntil20(String input) {
+        StringBuilder sb = new StringBuilder(input);
         while (sb.length() < 20) {
             sb.append("*");
         }
         return sb.toString();
     }
 
-    public static String removeAUsingBuilder(String text) {
-        StringBuilder sb = new StringBuilder(text);
-        for (int i = 0; i < sb.length(); i++) {
-            if (sb.charAt(i) == 'a') {
-                sb.deleteCharAt(i);
-                i--;
-            }
+    /**
+     * Removes all occurrences of the letter 'a' using String.replace.
+     * @param input Input text
+     * @return Modified string without 'a'
+     */
+    public String removeLetterA(String input) {
+        return input.replace("a", "");
+    }
+
+    /**
+     * Removes all occurrences of the letter 'a' using StringBuilder.
+     * @param input Input text
+     * @return Modified string without 'a'
+     */
+    public String removeLetterAUsingBuilder(String input) {
+        StringBuilder sb = new StringBuilder();
+        for (char ch : input.toCharArray()) {
+            if (ch != 'a') sb.append(ch);
         }
         return sb.toString();
     }
 
-    public static String replaceAWithStarBuilder(String text) {
-        StringBuilder sb = new StringBuilder(text);
-        for (int i = 0; i < sb.length(); i++) {
-            if (sb.charAt(i) == 'a') {
-                sb.setCharAt(i, '*');
-            }
-        }
-        return sb.toString();
+    /**
+     * Replaces all occurrences of 'a' with '*' using String.replace.
+     * @param input Input string
+     * @return Modified string
+     */
+    public String replaceAWithStar(String input) {
+        return input.replace("a", "*");
     }
 
-    public static String findLongestWordBuilder(String text) {
-        StringBuilder word = new StringBuilder();
+    /**
+     * Finds the longest word in a sentence. Words are separated by spaces.
+     * @param line Input sentence
+     * @return Longest word found
+     */
+    public String findLongestWord(String line) {
+        String[] words = line.split(" ");
         String longest = "";
-        for (int i = 0; i <= text.length(); i++) {
-            if (i < text.length() && text.charAt(i) != ' ') {
-                word.append(text.charAt(i));
-            } else {
-                if (word.length() > longest.length()) {
-                    longest = word.toString();
-                }
-                word.setLength(0);
+        for (String word : words) {
+            if (word.length() > longest.length()) {
+                longest = word;
             }
         }
         return longest;
     }
 
-    public static int findCharIndex(String line, String c) {
-        return line.indexOf(c);
+    /**
+     * Finds the index of the first occurrence of the character 'a' in a string.
+     * @param input Input string
+     * @return Index of the first 'a', or -1 if not found
+     */
+    public int indexOfFirstA(String input) {
+        return input.indexOf('a');
     }
 
-    public static void printSubLine(String line, int n) {
-        System.out.println(line.substring(0, Math.min(n + 1, line.length())));
+    /**
+     * Returns a substring from the beginning to the nth index.
+     * @param input Input string
+     * @param n End index (exclusive)
+     * @return Substring from 0 to n
+     */
+    public String substringToN(String input, int n) {
+        if (n > input.length()) return input;
+        return input.substring(0, n);
     }
 
-    public static void printSubLine(StringBuilder line, int n) {
-        System.out.println(line.substring(0, Math.min(n + 1, line.length())));
+    /**
+     * Returns a substring from the beginning to the nth index using StringBuilder.
+     * @param input Input string
+     * @param n End index (exclusive)
+     * @return Substring from 0 to n
+     */
+    public String substringToNUsingBuilder(String input, int n) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < input.length() && i < n; i++) {
+            sb.append(input.charAt(i));
+        }
+        return sb.toString();
     }
 
-    public static boolean isNotEmpty(String input) {
+    /**
+     * Checks whether the given string is not empty.
+     * @param input Input string
+     * @return Status message
+     */
+    public String checkNotEmpty(String input) {
+        return !input.isEmpty() ? "Not empty" : "Empty";
+    }
+
+    /**
+     * Checks if the given string is not null and not empty.
+     * @param input Input string
+     * @return true if valid, false otherwise
+     */
+    public boolean isNotNullOrEmpty(String input) {
         return input != null && !input.isEmpty();
     }
 
-    public static String longestAfterComma(String sentence) {
-        StringBuilder part = new StringBuilder();
+    /**
+     * Finds the longest word from a comma-separated list.
+     * @param input Input string
+     * @return Longest word
+     */
+    public String findLongestWordSplitByComma(String input) {
+        String[] words = input.split(",");
         String longest = "";
-        for (int i = 0; i <= sentence.length(); i++) {
-            if (i < sentence.length() && sentence.charAt(i) != ',') {
-                part.append(sentence.charAt(i));
-            } else {
-                String trimmed = part.toString().trim();
-                if (trimmed.length() > longest.length()) {
-                    longest = trimmed;
-                }
-                part.setLength(0);
+        for (String word : words) {
+            if (word.length() > longest.length()) {
+                longest = word;
             }
         }
         return longest;
