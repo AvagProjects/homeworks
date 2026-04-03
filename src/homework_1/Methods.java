@@ -1,8 +1,10 @@
+package homework_1;
+
 public class Methods {
 
     public static void main(String[] args) {
         // You can call your methods here to test them
-        System.out.println("Starting the Methods application...");
+        System.out.println("Starting the homework_1.Methods application...");
     }
 
     /**
