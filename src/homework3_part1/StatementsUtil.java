@@ -1,4 +1,4 @@
-package homework3;
+package homework3_part1;
 
 public class StatementsUtil {
     /**
