@@ -1,4 +1,4 @@
-package homework3_part2;
+package homework3.homework3_part2;
 
 class Animal {
     String name;

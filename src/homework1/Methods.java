@@ -1,4 +1,4 @@
-package homework_1;
+package homework1;
 
 public class Methods {
 
